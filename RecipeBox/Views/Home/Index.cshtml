@@ -1,0 +1,44 @@
+@{
+  Layout = "_Layout";
+}
+
+@using RecipeBox.Models
+
+<h1>Welcome</h1>
+
+@if (Model.ContainsKey("Recipes"))
+{
+    @if (Model["Recipes"].Length == 0) {
+    <p>No Recipes have been added yet!</p>
+  }
+}
+
+<br>
+
+<ul>
+  @foreach (Tag tag in Model["Tags"])
+  {
+    <li>@Html.ActionLink(@tag.Name, "Details", "Tags", new {id = @tag.TagId})</li>
+  }
+</ul>
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>Recipe for @User.Identity.Name</h4>
+  @if (Model["Recipes"].Length == 0)
+  {
+    <p>No Recipes have been added yet!</p>
+  } 
+  <ul>
+  <p>Click here @Html.ActionLink("Create a new Recipe", "Create", "Recipes") to view or manage your Recipes.</p>
+    @foreach (Recipe recipe in Model["Recipes"])
+    {
+      <li>@Html.ActionLink(@recipe.Name, "Details", "Recipes", new { id = @recipe.RecipeId})</li>
+    }
+  </ul>
+}
+else
+{
+  <h4>Recipes</h4>
+  <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view or manage your Recipes.</p>
+}
