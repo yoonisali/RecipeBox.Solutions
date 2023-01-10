@@ -1,43 +1,9 @@
-# Setup for template
-#### Thanks [Robert Bryan](https://github.com/robbryandev) for the rad name replacement code! :pray:
-* _clone CSharpTemplate.Solution repository to desktop_
-* _run npm commands below in CSharpTemplate.Solution replacing [ProjectName] with the project name_
-```
-npm i
-```
-```
-node ./index.js --name [ProjectName] --dest ~/Desktop
-```
 
-* _run dotnet commands below in ProjectName and ProjectName.Tests_
-```
-dotnet restore
-```
+# _RecipeBox_
 
-* _create appsettings.json file in ProjectName folder if using a MySql database_
-```
-{
-  "ConnectionStrings": {
-      "DefaultConnection": "Server=localhost;Port=3306;database=[database_name];uid=[USERNAME];pwd=[PASSWORD];"
-  }
-}
-```
+#### By: _**Brandon Fenk, Robert Bryan, Yoonis Ali**_
 
-* _to run project in developement mode_
-```
-dotnet watch run
-```
-* _to run project in production mode_
-```
-dotnet watch run --launch-profile "production"
-```
-
-
-# _{Application Name}_
-
-#### By: _**David Gamble**_
-
-#### _{Brief description of application}_
+#### _{}_
 
 ## Technologies Used
 
@@ -50,23 +16,36 @@ dotnet watch run --launch-profile "production"
 
 ## Description
 
-_{This is a detailed description of your application. Give as much detail as needed to explain what the application does as well as any other information you want users or other developers to have.}_
+_This application allows the user to create, view , and edit recipes and tags to keep in a recipe box._
 
 ## Setup/Installation Requirements
 
-* _Clone the repository to your desktop from: {Enter the repository url here}_
-* _Run [$ dotnet run] in the {ProjectName} repository in {ProjectName.Solutions}_
-
-_{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this application depends on? We recommend deleting the project from your desktop, re-cloning the project from GitHub, and writing down all the steps necessary to get the project working again.}_
-
+* _Clone the repository to your desktop from: https://github.com/yoonisali/RecipeBox.Solutions.git_
+* _Create appsettings.json file in the RecipeBox folder._
+```
+{
+  "ConnectionStrings": {
+      "DefaultConnection": "Server=localhost;Port=3306;database=recipe_box;uid=root;pwd=epicodus;"
+  }
+}
+```
+* _Run the dotnet commands below in RecipeBox._
+```
+dotnet restore
+```
+```
+dotnet ef database update
+```
+```
+dotnet watch run
+```
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+* _No known issues__
 
 ## License
 
-_Copyright (c) 2022 David Gamble_
+_Copyright (c) 2022 Brandon Fenk, Robert Bryan, Yoonis Ali_
 
 _Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:_
 

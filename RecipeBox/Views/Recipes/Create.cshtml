@@ -12,8 +12,9 @@
 @using (Html.BeginForm())
 {
    @Html.TextBoxFor(model => model.Name, new { placeholder ="Name", style ="text-align: center;"})<br><br>
-   @Html.TextBoxFor(model => model.Ingredients, new { placeholder ="Ingredients", style ="text-align: center;"})<br><br>
-   @Html.TextBoxFor(model => model.Instructions, new { placeholder ="Instructions", style ="text-align: center;"})
+   @Html.TextAreaFor(model => model.Ingredients, new { placeholder ="Ingredients", style ="text-align: center;"})<br><br>
+   @Html.TextAreaFor(model => model.Instructions, new { placeholder ="Instructions", style ="text-align: center;"})  
+  
 
     <br><br>
   <input type="submit" value="Add recipe" class="btn btn-primary" />

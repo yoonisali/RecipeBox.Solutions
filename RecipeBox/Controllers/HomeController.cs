@@ -29,8 +29,8 @@ namespace RecipeBox.Controllers
         // Recipe Logic
         Dictionary<string, object[]> model = new Dictionary<string, object[]>();
         if (currentUser != null) {
-          RecipeTag[] recipes = _db.RecipeTags
-            .Where(rec => rec.RecipeId.ToString() == currentUser.Id)
+          Recipe[] recipes = _db.Recipes
+            .Where(rec => rec.User.Id == currentUser.Id)
             .ToArray();
           model.Add("Recipes", recipes);
         }
