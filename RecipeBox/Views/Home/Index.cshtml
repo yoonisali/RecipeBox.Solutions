@@ -15,7 +15,10 @@
     @if (Model["Recipes"].Length == 0) {
   }
 }
-<div class="row">
+
+@if (User.Identity.IsAuthenticated)
+{
+  <div class="row">
   <div class="col-6">
 <h5>Tags for @User.Identity.Name</h5>
 @if (Model["Tags"].Length == 0)
@@ -29,8 +32,6 @@
   }
 </ul>
 </div>
-@if (User.Identity.IsAuthenticated)
-{
   <div class="col-6">
   <h5>Recipes for @User.Identity.Name</h5>
   @if (Model["Recipes"].Length == 0)
@@ -45,11 +46,14 @@
     }
   </ul>
 </div>
+</div>
+  <p>@Html.ActionLink("Log out", "Index", "Account")</p>
 }
-else
+else 
 {
   <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view or manage your Recipes and Tags.</p>
 }
-</div>
-  <p>@Html.ActionLink("Log out", "Index", "Account")</p>
+
+
+
   

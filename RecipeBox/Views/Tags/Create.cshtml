@@ -4,13 +4,13 @@
 
 @model RecipeBox.Models.Tag
 
-<h4>Add a new tag</h4>
+<h4>Add a new tag</h4><br>
 
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Name)
-    @Html.TextBoxFor(model => model.Name)
+    @Html.LabelFor(model => model.Name, new {style="padding-right: 20px;"})
+    @Html.TextBoxFor(model => model.Name)<br><br>
 
-    <input type="submit" value="Add new tag" class="btn btn-primary" />
+    <input type="submit" value="Add new tag" class="btn btn-warning" /><br><br>
 }
 <p>@Html.ActionLink("Show all tags", "Index")</p>

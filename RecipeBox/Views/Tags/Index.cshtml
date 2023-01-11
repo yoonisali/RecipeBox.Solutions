@@ -4,7 +4,7 @@
 
 @using RecipeBox.Models;
 
-<h1>Tags</h1>
+<h1>Tags for @User.Identity.Name</h1><br>
 
 @if (@Model.Count == 0)
 {
@@ -16,6 +16,6 @@
   <li>@Html.ActionLink($"{tag.Name}", "Details", new { id = tag.TagId })</li>
 }
 
-<p>@Html.ActionLink("Add new tag", "Create")</p>
+<p>@Html.ActionLink("Create a new tag", "Create")</p>
 
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

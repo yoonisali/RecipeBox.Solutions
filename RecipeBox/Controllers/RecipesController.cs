@@ -33,7 +33,7 @@ namespace RecipeBox.Controllers
             return View(userRecipes);
         }
 
-        // [Authorize]
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "Name");
@@ -80,6 +80,7 @@ namespace RecipeBox.Controllers
         }
 
         [HttpGet("/Recipes/AddTag/{id}")]
+        [Authorize]
         public ActionResult AddTag(int id)
         {
             Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipes => recipes.RecipeId == id);
@@ -105,6 +106,7 @@ namespace RecipeBox.Controllers
             return RedirectToAction("Details", new { id = recipe.RecipeId });
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             Recipe thisItem = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
@@ -120,6 +122,7 @@ namespace RecipeBox.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult DeleteJoin(int joinId)
         {
@@ -128,7 +131,8 @@ namespace RecipeBox.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        
+        [Authorize]
         public ActionResult Edit(int id)
         {
             Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
