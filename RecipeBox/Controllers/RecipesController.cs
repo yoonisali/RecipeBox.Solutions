@@ -11,6 +11,7 @@ using System.Security.Claims;
 
 namespace RecipeBox.Controllers
 {
+    [Authorize]
     public class RecipesController : Controller
     {
         private readonly RecipeBoxContext _db;
@@ -22,18 +23,22 @@ namespace RecipeBox.Controllers
             _db = db;
         }
 
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-            List<Recipe> userRecipes = _db.Recipes
+            ApplicationUser? currentUser = await _userManager.FindByIdAsync(userId);
+            if (currentUser != null) {
+                List<Recipe> userRecipes = _db.Recipes
                           .Where(rec => rec.User.Id == currentUser.Id.ToString())
                           // .Include(recipe => recipe.Tag)
                           .ToList();
             return View(userRecipes);
+            }
+            return View();
+            
         }
 
-        [Authorize]
         public ActionResult Create()
         {
             ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "Name");
@@ -80,7 +85,6 @@ namespace RecipeBox.Controllers
         }
 
         [HttpGet("/Recipes/AddTag/{id}")]
-        [Authorize]
         public ActionResult AddTag(int id)
         {
             Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipes => recipes.RecipeId == id);
@@ -106,7 +110,6 @@ namespace RecipeBox.Controllers
             return RedirectToAction("Details", new { id = recipe.RecipeId });
         }
 
-        [Authorize]
         public ActionResult Delete(int id)
         {
             Recipe thisItem = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
@@ -122,7 +125,6 @@ namespace RecipeBox.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult DeleteJoin(int joinId)
         {
@@ -132,7 +134,6 @@ namespace RecipeBox.Controllers
             return RedirectToAction("Index");
         }
         
-        [Authorize]
         public ActionResult Edit(int id)
         {
             Recipe thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);

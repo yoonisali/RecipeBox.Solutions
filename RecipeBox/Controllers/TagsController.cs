@@ -11,6 +11,7 @@ using System.Security.Claims;
 
 namespace RecipeBox.Controllers
 {
+    [Authorize]
     public class TagsController : Controller
     {
         private readonly RecipeBoxContext _db;
@@ -19,7 +20,7 @@ namespace RecipeBox.Controllers
         {
             _db = db;
         }
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(_db.Tags.ToList());
